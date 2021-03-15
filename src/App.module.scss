@@ -1,0 +1,22 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  header {
+    flex: 0 0 64px;
+  }
+
+  main {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+  }
+
+  footer {
+    flex: 0 0 70px;
+    background-color: #fff;
+  }
+}
