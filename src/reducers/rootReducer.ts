@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import { menuPageReducer } from './menuPageReducer';
+import { recipesPageReducer } from './recipesPageReducer';
 
 const rootReducer = combineReducers({
-  menuPage: menuPageReducer
+  menuPage: menuPageReducer,
+  recipesPage: recipesPageReducer
 });
 
 export { rootReducer };

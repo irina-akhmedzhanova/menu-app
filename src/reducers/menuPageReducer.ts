@@ -1,9 +1,12 @@
-import { ActionTypes } from '../actionTypes/actionsTypes';
-import { WeekActions } from '../actions/weekActions';
+import { WeekActionTypes, WeekActions } from '../actions/weeks/types';
 
 export type Recipe = {
   mealtime: string,
-  title: string
+  title: string,
+  description: string,
+  photo: {
+    url: string | undefined
+  }
 };
 
 export type Day = {
@@ -27,11 +30,11 @@ function menuPageReducer(
   action: WeekActions
 ) { 
   switch (action.type) {
-    case ActionTypes.FETCH_WEEK_START:
+    case WeekActionTypes.FETCH_WEEK_START:
       return {...state, loading: true}
-    case ActionTypes.FETCH_WEEK_SUCCESS:
+    case WeekActionTypes.FETCH_WEEK_SUCCESS:
       return {...state, data: action.payload, loading: false}
-    case ActionTypes.FETCH_WEEK_ERROR:
+    case WeekActionTypes.FETCH_WEEK_ERROR:
       return {...state, error: action.payload}
 
     default: return state

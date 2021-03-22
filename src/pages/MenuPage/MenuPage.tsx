@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Row, Col, Divider, Space, Button, Spin } from 'antd';
 import { ShoppingTwoTone, BookTwoTone } from '@ant-design/icons';
-import { ActionCreators } from '../../store/index';
+import { fetchWeek } from '../../actions';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
+import { MEALTIMES } from '../../constants/constants';
 import 'antd/dist/antd.css';
 import classes from './MenuPage.module.scss';
 import cn from 'classnames';
@@ -17,17 +18,10 @@ const MenuPage = () => {
     'Пятница',
   ];
 
-  const mealtimes = [
-    { title: 'Завтрак', value: 'breakfast' },
-    { title: 'Обед', value: 'lunch' },
-    { title: 'Ужин', value: 'supper' },
-  ];
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(ActionCreators.fetchWeek());
-    console.log(dispatch(ActionCreators.fetchWeek))
+    dispatch(fetchWeek());
   }, [dispatch]);
 
   const { data, loading } = useTypeSelector((state) => state.menuPage)
@@ -47,23 +41,23 @@ const MenuPage = () => {
                 <Col key={index} span={4}>{item}</Col>
               ))}
             </Row>
-            {mealtimes.map((mealtime, index) => (
+            {MEALTIMES.map((mealtime, index) => (
               <Row key={index} className={classes.row}>
                 <Col span={4}>{mealtime.title}</Col>
                 {data.map((day, index) => {
-                  const result = day.recipes.filter((recipe) => recipe.mealtime === mealtime.value)
+                  const result = day.recipes.filter((recipe) => recipe.mealtime === mealtime.value);
                   return (
                     <Col key={index} span={4}>{result.map((recipe, index) => (
                       <span key={index}>{recipe.title}</span>
                     ))}</Col>
-                  )
+                  );
                 })}
               </Row>
             ))} </div>)}
       </div>
       <div className={classes.buttons}>
         <Space size="large">
-          <Button shape="round" icon={<BookTwoTone />}>Перейти к списку рецептов</Button>
+          <Button shape="round" icon={<BookTwoTone />} href="/recipes">Перейти к списку рецептов</Button>
           <Button shape="round" icon={<ShoppingTwoTone />}>Перейти к списку покупок</Button>
         </Space>
       </div>
