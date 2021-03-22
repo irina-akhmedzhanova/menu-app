@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Divider, Spin, List, Typography, Card } from 'antd';
+import { Divider, Spin, List, Typography, Card, Popover } from 'antd';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
 import { fetchRecipes } from '../../actions';
 import { MEALTIMES } from '../../constants/constants';
 import classes from './RecipesPage.module.scss';
-import Item from 'antd/lib/list/Item';
 
 
 const RecipesPage = () => {
@@ -39,7 +38,7 @@ const RecipesPage = () => {
                   size="small"
                   itemLayout="vertical"
                   grid={{
-                    gutter: 8, 
+                    gutter: 8,
                     xs: 1,
                     sm: 2,
                     md: 3,
@@ -54,7 +53,10 @@ const RecipesPage = () => {
                         hoverable
                         cover={<img alt="example" src={"http://192.168.1.199:1337" + item.photo.url} style={{ height: 200, objectFit: "cover" }} />}
                       >
-                        <Meta title={item.title} />
+                        <Popover content={item.title} placement="topRight">
+                          <Meta title={item.title} />
+                        </Popover>
+                        
                       </Card>
                     </List.Item>
                   )}
